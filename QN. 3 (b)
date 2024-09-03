@@ -1,0 +1,31 @@
+#include <iostream>
+
+int gcd(int a, int b) {
+    if (b == 0) {
+        return a;
+    } else {
+        return gcd(b, a % b);
+    }
+}
+
+int reduce(int& num, int& denom) {
+    if (num <= 0 || denom <= 0) {
+        return 0; // failure to reduce
+    }
+    int gcd_val = gcd(num, denom);
+    num /= gcd_val;
+    denom /= gcd_val;
+    return 1; // success
+}
+
+int main() {
+    int num = 12;
+    int denom = 18;
+    if (reduce(num, denom) == 1) {
+        std::cout << "Reduced fraction: " << num << "/" << denom << std::endl;
+    } else {
+        std::cout << "Failed to reduce fraction." << std::endl;
+    }
+
+    return 0;
+}
